@@ -1,5 +1,5 @@
 Name:                cryptonite
-version:             0.26
+version:             0.27
 Synopsis:            Cryptography Primitives sink
 Description:
     A repository of cryptographic primitives.
@@ -117,6 +117,7 @@ Library
                      Crypto.Cipher.ChaCha
                      Crypto.Cipher.ChaChaPoly1305
                      Crypto.Cipher.DES
+                     Crypto.Cipher.HC128
                      Crypto.Cipher.RC4
                      Crypto.Cipher.Salsa
                      Crypto.Cipher.TripleDES
@@ -261,6 +262,7 @@ Library
   C-sources:         cbits/cryptonite_chacha.c
                    , cbits/cryptonite_salsa.c
                    , cbits/cryptonite_xsalsa.c
+                   , cbits/cryptonite_hc128.c
                    , cbits/cryptonite_rc4.c
                    , cbits/cryptonite_cpu.c
                    , cbits/p256/p256.c
