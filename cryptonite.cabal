@@ -399,6 +399,20 @@ Library
   if flag(use_target_attributes)
     cc-options:     -DWITH_TARGET_ATTRIBUTES
 
+Executable test-hc128
+  main-is: Main.hs
+  
+  hs-source-dirs:
+    hc128test
+  other-extensions: OverloadedStrings, DeriveGeneric
+  ghc-options: -Wall -fno-warn-unused-do-bind -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+    base
+    , cryptonite
+    , memory
+    , bytestring
+  default-language: Haskell2010
+
 Test-Suite test-cryptonite
   type:              exitcode-stdio-1.0
   hs-source-dirs:    tests
