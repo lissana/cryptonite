@@ -12,8 +12,14 @@ key = B.pack [0x42, 0x5B, 0x29, 0xFD, 0xB7, 0x53, 0xC5, 5, 0x83, 0x77, 0xE8, 0xA
 iv :: B.ByteString
 iv = B.pack [0xDE, 0xAD, 0x45, 0xC1, 0x2A, 0xC8, 0x93, 0xCE, 0xAA, 0, 0xBF, 0xB6, 0x7B, 0x40, 0x19, 0xA7]
 
+
+splitPackets p = do
+    size <- runGet getWord32le
+    print size
+
 main = do
   let state = HC128.initialize key 
       something = HC128.set_iv state iv 
       (state3, adata) = HC128.combine something (B.pack TD.serverData1)
+  splitPackets adata
   putStrLn  $ Hexdump.prettyHex adata
