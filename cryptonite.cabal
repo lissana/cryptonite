@@ -412,6 +412,7 @@ Executable test-hc128
     , memory
     , bytestring
     , pretty-hex
+    , binary
   default-language: Haskell2010
 
 Test-Suite test-cryptonite
