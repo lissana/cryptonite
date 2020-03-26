@@ -26,8 +26,9 @@ splitPackets p = do
     return () 
 
 main = do
+  x <- BL.readFile "/home/sdancer/projects/v4/client_stream"
   let state = HC128.initialize key 
       something = HC128.set_iv state iv 
-      (state3, adata) = HC128.combine something (B.pack TD.serverData1)
+      (state3, adata) = HC128.combine something (B.pack $ BL.unpack x)
   splitPackets $ BL.pack (B.unpack adata)
 
