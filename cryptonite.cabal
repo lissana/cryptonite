@@ -399,7 +399,8 @@ Library
   if flag(use_target_attributes)
     cc-options:     -DWITH_TARGET_ATTRIBUTES
 
-Executable test-hc128
+Test-Suite test-hc128
+  type:              exitcode-stdio-1.0
   main-is: Main.hs
   
   hs-source-dirs:
@@ -428,6 +429,7 @@ Test-Suite test-cryptonite
                      ECDSA
                      Hash
                      Imports
+                     HC128
                      KAT_AES.KATCBC
                      KAT_AES.KATECB
                      KAT_AES.KATGCM

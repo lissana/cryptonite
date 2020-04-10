@@ -13,6 +13,7 @@ import qualified ECC
 import qualified ECC.Edwards25519
 import qualified ECDSA
 import qualified Hash
+import qualified HC128
 import qualified Poly1305
 import qualified Salsa
 import qualified XSalsa
@@ -93,6 +94,7 @@ tests = testGroup "cryptonite"
         , ChaChaPoly1305.tests
         , Salsa.tests
         , XSalsa.tests
+        , HC128.tests
         ]
     , KAT_AFIS.tests
     , ECC.tests

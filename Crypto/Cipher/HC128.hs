@@ -1,12 +1,12 @@
 -- |
--- Module      : Crypto.Cipher.RC4
+-- Module      : Crypto.Cipher.HC128
 -- License     : BSD-style
 -- Maintainer  : Vincent Hanquez <vincent@snarc.org>
 -- Stability   : stable
 -- Portability : Good
 --
--- Simple implementation of the RC4 stream cipher.
--- http://en.wikipedia.org/wiki/RC4
+-- Simple implementation of the HC128 stream cipher.
+-- http://en.wikipedia.org/wiki/HC128
 --
 -- Initial FFI implementation by Peter White <peter@janrain.com>
 --
@@ -30,7 +30,7 @@ import qualified Crypto.Internal.ByteArray as B
 import           Crypto.Internal.Compat
 import           Crypto.Internal.Imports
 
--- | The encryption state for RC4
+-- | The encryption state for HC128
 newtype State = State ScrubbedBytes
     deriving (ByteArrayAccess,NFData)
 
@@ -55,13 +55,13 @@ foreign import ccall unsafe "cryptonite_hc128.h cryptonite_hc128_combine"
                   -> Ptr Word8      -- ^ Output buffer
                   -> IO ()
 
--- | RC4 context initialization.
+-- | HC128 context initialization.
 --
 -- seed the context with an initial key. the key size need to be
 -- adequate otherwise security takes a hit.
 initialize :: ByteArrayAccess key
            => key   -- ^ The key
-           -> State -- ^ The RC4 context with the key mixed in
+           -> State -- ^ The HC128 context with the key mixed in
 initialize key = unsafeDoIO $ do
     st <- B.alloc 9000 $ \stPtr ->
         B.withByteArray key $ \keyPtr -> c_hc128_init keyPtr (fromIntegral $ B.length key) (castPtr stPtr)
@@ -83,7 +83,7 @@ set_iv (State prevSt) iv = unsafeDoIO $
 generate :: ByteArray ba => State -> Int -> (State, ba)
 generate ctx len = combine ctx (B.zero len)
 
--- | RC4 xor combination of the rc4 stream with an input
+-- | HC128 xor combination of the rc4 stream with an input
 combine :: ByteArray ba
         => State               -- ^ rc4 context
         -> ba                  -- ^ input
